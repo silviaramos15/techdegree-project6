@@ -2,8 +2,10 @@
 let qwerty = document.querySelector('#qwerty');
 let phrases = document.querySelector('#phrase');
 let btn_reset = document.querySelector('.btn__reset');
-let missed = 0; //variable keeps track of number of guesses
 let ul = document.querySelector('#phrase ul');
+let key = document.querySelector('.keyrow button');
+let missed = 0; //variable keeps track of number of guesses
+
 // Create an array with at least 5 phrases
 phrases = [
     'Part of the Journey is the end',
@@ -49,10 +51,43 @@ const addPhraseToDisplay = arr => {
         }
     } 
 
+ 
 }
+ addPhraseToDisplay(phrase);
+
 
 
 //Create a checkLetter function
-// function checkLetter () {
+function checkLetter(clickLetter) {
+    const letters = document.querySelector('.letter');
+    let match = null;
+    for (let i = 0; i < letters.length; i++){
+        if (clickLetter === letters[i].textContent) {
+           letters[i].className = '.show';
+            match = letters[i].textContent;
+        }
+    }
+    return match
+}
 
-// }
+checkLetter();
+
+
+// ADD AN EVENT LISTENER TO THE KEYBOARD
+qwerty.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+        const clickedButton = e.target;
+        clickedButton.className = 'chosen';
+        clickedButton.disabled = 'true';
+
+        let letterFound = checkLetter(clickedButton);
+        if (letterFound === null) {
+            
+            const listHearts = document.querySelectorAll('.tries');
+            const lostHeart = document.querySelectorAll('.tries img');
+            missed++;
+            lostHeart[0].src = "images/lostHeart.png";
+            listHearts[0].className = ' ';
+        }
+    }
+});
