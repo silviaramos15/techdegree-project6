@@ -34,6 +34,8 @@ function getRandomPhrase() {
 let phrase = getRandomPhrase(); //holds the random phrase
 
 
+
+
 //Add letters of a string to the display
 const addPhraseToDisplay = arr => {
     
@@ -59,11 +61,11 @@ const addPhraseToDisplay = arr => {
 
 //Create a checkLetter function
 function checkLetter(clickLetter) {
-    const letters = document.querySelector('.letter');
+    const letters = document.querySelectorAll('.letter');
     let match = null;
     for (let i = 0; i < letters.length; i++){
-        if (clickLetter === letters[i].textContent) {
-           letters[i].className = '.show';
+        if (clickLetter === letters[i].textContent.toLowerCase()) {
+           letters[i].className = ' letter show';
             match = letters[i].textContent;
         }
     }
@@ -80,7 +82,7 @@ qwerty.addEventListener('click', (e) => {
         clickedButton.className = 'chosen';
         clickedButton.disabled = 'true';
 
-        let letterFound = checkLetter(clickedButton);
+        let letterFound = checkLetter(clickedButton.textContent);
         if (letterFound === null) {
             
             const listHearts = document.querySelectorAll('.tries');
@@ -91,3 +93,7 @@ qwerty.addEventListener('click', (e) => {
         }
     }
 });
+
+//Create a checkWin Function
+// const liLetter = ;
+// const liShow = ;
