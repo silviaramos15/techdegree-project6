@@ -100,7 +100,7 @@ button {
 .show {
   color: #fff;
   background-color: #f1bba9;
-  transition: background-color 1s ease-in-out, color 1.3s;
+  transition: background-color .7s ease-in-out, color 1.3s;
 
 }
 /* Keyboard */
@@ -177,3 +177,4 @@ P {
   width: 70%;
   margin: 0 auto;
 }
+

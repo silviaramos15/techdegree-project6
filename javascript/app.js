@@ -3,8 +3,11 @@ let qwerty = document.querySelector('#qwerty');
 let phrases = document.querySelector('#phrase');
 let btn_reset = document.querySelector('.btn__reset');
 let ul = document.querySelector('#phrase ul');
-let key = document.querySelectorAll('#keyrow button');
+let key = document.querySelectorAll('.keyrow button');
 let h2 = document.querySelector('h2');
+let heartImage = document.querySelectorAll('.tries img');
+let hearts = document.querySelectorAll('#scoreboard ol li');
+
 
 let missed = 0; //variable keeps track of number of guesses
 
@@ -15,7 +18,8 @@ let missed = 0; //variable keeps track of number of guesses
 //     'No man can win every battle but no man should fall without a struggle',
 //     'It is not who I am underneath but what I do that defines me',
 //     'Why do we fall so we can learn to pick ourselves back up',
-//     'When you decide not to be afraid you can find friends in super unexpected places',
+        // 'You are much stronger than you think you are.'
+//     'Heroes are made by the path they choose',
 //     'Life does not give us purpose but we give life purpose',
 //     'In a world of orfinary mortales You are a wonder woman',
 //     'With great power comes great responsability'
@@ -103,6 +107,7 @@ function checkWin () {
     if (liLetter.length === liShow.length) {
         overlay.className = 'start';
         h2.textContent = `You Won!`;
+      
        
         const p = document.createElement('P');
         p.textContent = `The winner phrase was: ${phrase}`;
@@ -131,17 +136,20 @@ function checkWin () {
 function resetGame () {
     missed = 0;
     ul.innerHTML = ' ';
-    let keyboard = document.querySelectorAll('#keyrow button');
+    let keyboard = document.querySelectorAll('.keyrow button');
     for (let i = 0; i < keyboard.length; i++) {
         keyboard[i].className = ' ';
-        keyboard[i].disabled = 'false';
+        keyboard[i].disabled = false;
     }
-    const hearts = document.querySelectorAll('.tries');
-    for (let j = 0; j > hearts.lenght; j++) {
-    hearts[0].src = "../images/heart.png";
+    
+    for (let j = 0; j < hearts.lenght; j++) {
+    hearts[j].className = 'tries';
+    heartImage[j].src = "../images/heart.png";
     }
     
 }
+
+
 
 
 // START GAME
