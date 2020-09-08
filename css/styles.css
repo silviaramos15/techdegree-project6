@@ -6,10 +6,10 @@
 :root {
   --color-win: #78CF82;
   --color-lose: #D94545;
-  --color-start: #5b85b7;
+  --color-start: #E9967A;
   --color-neutral: #445069;
   --color-neutral-light: #D2D2D2;
-  --color-keys: #37474F;
+  --color-keys: #E9967A;
   --color-keys-light: #E5E5E5;
   --font-size-large: 60px;
   --font-size-medium: 20px;
@@ -27,6 +27,8 @@ body {
   flex-direction: column;
   display: flex;
   height: 100vh;
+  background-color: #fdf4f2;
+  
 }
 
 li, ol, ul {
@@ -61,6 +63,7 @@ button {
   justify-content: space-around;
   height: 100%;
   max-height: 900px;
+  max-width: 95%;
   text-align: center;
 }
 
@@ -94,10 +97,11 @@ button {
 }
 
 .show {
-  color: #000;
-  background-color: #76CE82;
-}
+  color: #fff;
+  background-color: #f1bba9;
+  transition: background-color 1s ease-in-out, color 1.3s;
 
+}
 /* Keyboard */
 
 .keyrow {
@@ -144,7 +148,7 @@ button {
 }
 
 .start a {
-  color: var(--color-win);
+  color: #E9967A;
 }
 
 .win {
@@ -161,4 +165,8 @@ button {
 
 .lose a {
   color: var(--color-lose);
+}
+
+#scoreboard {
+  border-bottom: 3px solid  #eca68e;
 }
