@@ -4,6 +4,8 @@ let phrases = document.querySelector('#phrase');
 let btn_reset = document.querySelector('.btn__reset');
 let ul = document.querySelector('#phrase ul');
 let key = document.querySelector('.keyrow button');
+let overlay = document.querySelector('#overlay');
+let h2 = document.querySelector('h2');
 let missed = 0; //variable keeps track of number of guesses
 
 // Create an array with at least 5 phrases
@@ -88,12 +90,27 @@ qwerty.addEventListener('click', (e) => {
             const listHearts = document.querySelectorAll('.tries');
             const lostHeart = document.querySelectorAll('.tries img');
             missed++;
-            lostHeart[0].src = "images/lostHeart.png";
+            lostHeart[0].src = "../images/lostHeart.png";
             listHearts[0].className = ' ';
         }
     }
 });
 
 //Create a checkWin Function
-// const liLetter = ;
-// const liShow = ;
+function checkWin () {
+    const liLetter = document.querySelectorAll('.letter');
+    const liShow = document.querySelectorAll('.show');
+    if (liLetter.length === liShow.length) {
+        overlay.className = 'start';
+        h2.textContent = "You Won!"
+        overlay.style.visibility = 'visible';
+        btn_reset.textContent = 'Play again';
+    } else if (missed > 4) {
+        overlay.className = 'lose';
+        h2.textContent = "Better luck next time";
+        overlay.style.visibility = "visible";
+        btn_resent.textContent = 'Play again';
+    }
+
+}
+checkWin();
