@@ -3,7 +3,7 @@ let qwerty = document.querySelector('#qwerty');
 let phrases = document.querySelector('#phrase');
 let btn_reset = document.querySelector('.btn__reset');
 let ul = document.querySelector('#phrase ul');
-let key = document.querySelector('.keyrow button');
+let key = document.querySelectorAll('#keyrow button');
 let h2 = document.querySelector('h2');
 
 let missed = 0; //variable keeps track of number of guesses
@@ -103,6 +103,7 @@ function checkWin () {
     if (liLetter.length === liShow.length) {
         overlay.className = 'start';
         h2.textContent = `You Won!`;
+       
         const p = document.createElement('P');
         p.textContent = `The winner phrase was: ${phrase}`;
         h2.appendChild(p);
@@ -117,7 +118,7 @@ function checkWin () {
         h2.textContent = "Better luck next time";
         function looser() {
             overlay.style.visibility = 'visible';
-            btn_reset.textContent = 'Play again';
+            btn_reset.textContent = 'Try again';
         }
         
     }
@@ -130,13 +131,13 @@ function checkWin () {
 function resetGame () {
     missed = 0;
     ul.innerHTML = ' ';
-    const keyboard = document.querySelectorAll('.qwerty button');
+    let keyboard = document.querySelectorAll('#keyrow button');
     for (let i = 0; i < keyboard.length; i++) {
         keyboard[i].className = ' ';
         keyboard[i].disabled = 'false';
     }
     const hearts = document.querySelectorAll('.tries');
-    for (let j = 0; j < hearts.lenght; j++) {
+    for (let j = 0; j > hearts.lenght; j++) {
     hearts[0].src = "../images/heart.png";
     }
     
@@ -144,7 +145,7 @@ function resetGame () {
 
 
 // START GAME
-keyboard.addEventListener('click', () => {
+btn_reset.addEventListener('click', event => {
     overlay.style.visibility = 'hidden';
     resetGame();
     const newPhrase = getRandomPhrase();
