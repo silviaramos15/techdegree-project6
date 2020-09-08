@@ -65,6 +65,7 @@ button {
   max-height: 900px;
   max-width: 95%;
   text-align: center;
+  margin: 0 auto;
 }
 
 .section {
@@ -169,4 +170,10 @@ button {
 
 #scoreboard {
   border-bottom: 3px solid  #eca68e;
+}
+
+P {
+  font-size: 16px;
+  width: 70%;
+  margin: 0 auto;
 }

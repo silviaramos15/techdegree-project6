@@ -5,6 +5,7 @@ let btn_reset = document.querySelector('.btn__reset');
 let ul = document.querySelector('#phrase ul');
 let key = document.querySelector('.keyrow button');
 let h2 = document.querySelector('h2');
+
 let missed = 0; //variable keeps track of number of guesses
 
 // Create an array with at least 5 phrases
@@ -84,7 +85,6 @@ qwerty.addEventListener('click', (e) => {
 
         let letterFound = checkLetter(clickedButton.textContent);
         if (letterFound === null) {
-            
             const listHearts = document.querySelectorAll('.tries');
             const lostHeart = document.querySelectorAll('.tries img');
             missed++;
@@ -92,6 +92,7 @@ qwerty.addEventListener('click', (e) => {
             listHearts[0].className = ' ';
         }
         checkWin();
+        
     }
 });
 
@@ -101,44 +102,51 @@ function checkWin () {
     const liShow = document.querySelectorAll('.show');
     if (liLetter.length === liShow.length) {
         overlay.className = 'start';
-        h2.textContent = "You Won!"
-        overlay.style.visibility = 'visible';
-        btn_reset.textContent = 'Play again';
-        btn_reset.addEventListener('click', event => {
-            window.location.reload();
-            document.querySelector('#overlay').style.visibility = 'hidden'; 
-            
-        });
+        h2.textContent = `You Won!`;
+        const p = document.createElement('P');
+        p.textContent = `The winner phrase was: ${phrase}`;
+        h2.appendChild(p);
+        function winner() {
+            overlay.style.visibility = 'visible';
+            btn_reset.textContent = 'Play again';
+        }
+        setTimeout(winner, 1500);
         
     } else if (missed > 4) {
         overlay.className = 'lose';
         h2.textContent = "Better luck next time";
-        overlay.style.visibility= "visible";
-        btn_reset.textContent = 'Play again';
-        btn_reset.addEventListener('click', event => {
-            window.location.reload();
-            document.querySelector('#overlay').style.visibility = 'hidden'; 
-           
-        });
+        function looser() {
+            overlay.style.visibility = 'visible';
+            btn_reset.textContent = 'Play again';
+        }
+        
     }
-
+    setTimeout(looser, 1000);
+    
 }
 
-//--------BELOW ARE MY NOTES, IGNORE IT :))) 
+// RESET GAME 
 
-// function resetGame () {
-//     missed = 0;
+function resetGame () {
+    missed = 0;
+    ul.innerHTML = ' ';
+    const keyboard = document.querySelectorAll('.qwerty button');
+    for (let i = 0; i < keyboard.length; i++) {
+        keyboard[i].className = ' ';
+        keyboard[i].disabled = 'false';
+    }
+    const hearts = document.querySelectorAll('.tries');
+    for (let j = 0; j < hearts.lenght; j++) {
+    hearts[0].src = "../images/heart.png";
+    }
     
+}
 
 
-
-// //START GAME
-// btn_reset.addEventListener('click', () => {
-//     resetGame();
-//     overlay.style.visibility = 'hidden';
-//     const newPhrase = getRandomPhrase();
-//     addPhraseToDisplay(newPhrase);
-// }
-
-// });
-
+// START GAME
+keyboard.addEventListener('click', () => {
+    overlay.style.visibility = 'hidden';
+    resetGame();
+    const newPhrase = getRandomPhrase();
+    addPhraseToDisplay(newPhrase);
+});
