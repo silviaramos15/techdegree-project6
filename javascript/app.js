@@ -8,8 +8,10 @@ let h2 = document.querySelector('h2');
 let heartImage = document.querySelectorAll('.tries img');
 let hearts = document.querySelectorAll('#scoreboard ol li');
 
-
 let missed = 0; //variable keeps track of number of guesses
+
+
+
 
 // Create an array with at least 5 phrases
 phrases = [
@@ -30,6 +32,8 @@ btn_reset.addEventListener('click', event => {
     document.querySelector('#overlay').style.visibility = 'hidden'; 
 });
 
+
+
 //Create a getRandomPhraseAsArray function
 function getRandomPhrase() {
     let randomNumber = Math.floor(Math.random() * phrases.length);
@@ -43,7 +47,7 @@ let phrase = getRandomPhrase(phrases); //holds the random phrase
 
 //Add letters of a string to the display
 
-function addPhraseToDisplay(phrase) {
+function addPhraseToDisplay() {
     
     for (let i = 0; i < phrase.length; i++) {
         
@@ -61,7 +65,7 @@ function addPhraseToDisplay(phrase) {
 
  
 }
- addPhraseToDisplay(phrase);
+ addPhraseToDisplay();
 
 
 
@@ -116,8 +120,9 @@ function checkWin () {
             btn_reset.textContent = 'Play again';
         }
         setTimeout(winner, 1500);
-        
-    } else if (missed > 4) {
+      
+      
+      } else if (missed > 4) {
         overlay.className = 'lose';
         h2.textContent = "Game Over";
         const p = document.createElement('P');
@@ -127,9 +132,9 @@ function checkWin () {
             overlay.style.visibility = 'visible';
             btn_reset.textContent = 'Try again';
         }
-        setTimeout(looser, 1000);
+        
     }
-   
+    setTimeout(looser, 1000);
     
 }
 
@@ -156,6 +161,6 @@ function resetGame () {
 btn_reset.addEventListener('click', event => {
     overlay.style.visibility = 'hidden';
     resetGame();
-    let newPhrase = getRandomPhrase(phrases);
-    addPhraseToDisplay(newPhrase);
+    phrase = getRandomPhrase(phrases);
+    addPhraseToDisplay();
 });
