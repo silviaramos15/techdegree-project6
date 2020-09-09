@@ -18,7 +18,7 @@ phrases = [
     'No man can win every battle but no man should fall without a struggle',
     'It is not who I am underneath but what I do that defines me',
     'Why do we fall so we can learn to pick ourselves back up',
-     'You are much stronger than you think you are.',
+     'You are much stronger than you think you are',
     'Heroes are made by the path they choose',
     'Life does not give us purpose but we give life purpose',
     'In a world of orfinary mortales You are a wonder woman',
@@ -42,7 +42,8 @@ let phrase = getRandomPhrase(phrases); //holds the random phrase
 
 
 //Add letters of a string to the display
-const addPhraseToDisplay = arr => {
+
+function addPhraseToDisplay(phrase) {
     
     for (let i = 0; i < phrase.length; i++) {
         
@@ -92,7 +93,7 @@ qwerty.addEventListener('click', (e) => {
             const listHearts = document.querySelectorAll('.tries');
             const lostHeart = document.querySelectorAll('.tries img');
             missed++;
-            lostHeart[0].src = "../images/lostHeart.png";
+            lostHeart[0].src = "images/lostHeart.png";
             listHearts[0].className = ' ';
         }
         checkWin();
@@ -105,10 +106,10 @@ function checkWin () {
     const liLetter = document.querySelectorAll('.letter');
     const liShow = document.querySelectorAll('.show');
     if (liLetter.length === liShow.length) {
-        overlay.className = 'start';
+        overlay.className = 'win';
         h2.textContent = `You Won!`;
         const p = document.createElement('P');
-        p.textContent = `The winner phrase was: ${phrase}`;
+        p.textContent = `<< ${phrase} >>`;
         h2.appendChild(p);
         function winner() {
             overlay.style.visibility = 'visible';
@@ -144,9 +145,9 @@ function resetGame () {
         keyboard[i].disabled = false;
     }
     
-    for (let j = 0; j < hearts.lenght; j++) {
+    for (let j = 0; j < hearts.length; j++) {
     hearts[j].className = 'tries';
-    heartImage[j].src = "../images/heart.png";
+    heartImage[j].src = "images/heart.png";
     }
     
 }
