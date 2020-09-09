@@ -12,19 +12,19 @@ let hearts = document.querySelectorAll('#scoreboard ol li');
 let missed = 0; //variable keeps track of number of guesses
 
 // Create an array with at least 5 phrases
-// phrases = [
-//     'Part of the Journey is the end',
-//     'The hardest choices require the strongest wills',
-//     'No man can win every battle but no man should fall without a struggle',
-//     'It is not who I am underneath but what I do that defines me',
-//     'Why do we fall so we can learn to pick ourselves back up',
-        // 'You are much stronger than you think you are.'
-//     'Heroes are made by the path they choose',
-//     'Life does not give us purpose but we give life purpose',
-//     'In a world of orfinary mortales You are a wonder woman',
-//     'With great power comes great responsability'
-// ];
-phrases = ['Z X C']
+phrases = [
+    'Part of the Journey is the end',
+    'The hardest choices require the strongest wills',
+    'No man can win every battle but no man should fall without a struggle',
+    'It is not who I am underneath but what I do that defines me',
+    'Why do we fall so we can learn to pick ourselves back up',
+     'You are much stronger than you think you are.',
+    'Heroes are made by the path they choose',
+    'Life does not give us purpose but we give life purpose',
+    'In a world of orfinary mortales You are a wonder woman',
+    'With great power comes great responsability'
+];
+// phrases = ['Z X C']
 //Attach an event listener to the START GAME button 
 btn_reset.addEventListener('click', event => {
     document.querySelector('#overlay').style.visibility = 'hidden'; 
@@ -36,7 +36,7 @@ function getRandomPhrase() {
     return phrases[randomNumber];
     
 } 
-let phrase = getRandomPhrase(); //holds the random phrase
+let phrase = getRandomPhrase(phrases); //holds the random phrase
 
 
 
@@ -107,8 +107,6 @@ function checkWin () {
     if (liLetter.length === liShow.length) {
         overlay.className = 'start';
         h2.textContent = `You Won!`;
-      
-       
         const p = document.createElement('P');
         p.textContent = `The winner phrase was: ${phrase}`;
         h2.appendChild(p);
@@ -120,20 +118,24 @@ function checkWin () {
         
     } else if (missed > 4) {
         overlay.className = 'lose';
-        h2.textContent = "Better luck next time";
+        h2.textContent = "Game Over";
+        const p = document.createElement('P');
+        p.textContent = `Better luck next time!`;
+        h2.appendChild(p);
         function looser() {
             overlay.style.visibility = 'visible';
             btn_reset.textContent = 'Try again';
         }
-        
+        setTimeout(looser, 1000);
     }
-    setTimeout(looser, 1000);
+   
     
 }
 
 // RESET GAME 
 
 function resetGame () {
+   
     missed = 0;
     ul.innerHTML = ' ';
     let keyboard = document.querySelectorAll('.keyrow button');
@@ -149,13 +151,10 @@ function resetGame () {
     
 }
 
-
-
-
 // START GAME
 btn_reset.addEventListener('click', event => {
     overlay.style.visibility = 'hidden';
     resetGame();
-    const newPhrase = getRandomPhrase();
+    let newPhrase = getRandomPhrase(phrases);
     addPhraseToDisplay(newPhrase);
 });
